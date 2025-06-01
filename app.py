@@ -1,5 +1,5 @@
-from flask import Flask, jsonify, Response
-import time
+from flask import Flask, Response
+import os
 
 # Import your existing functions
 from fetcher import authenticate, get_latest_chapters, group_by_manga_series
@@ -113,4 +113,13 @@ def get_manga():
 
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    port = int(os.environ.get('PORT', 5000))
+
+    # Check if we're running on Railway (or any cloud platform)
+    if os.environ.get('RAILWAY_ENVIRONMENT') or os.environ.get('PORT'):
+        # Production/Railway deployment
+        port = int(os.environ.get('PORT', 5000))
+        app.run(debug=False, host='0.0.0.0', port=port)
+    else:
+        # Local development
+        app.run(debug=True, port=5000)
