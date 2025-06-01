@@ -67,7 +67,7 @@ def group_by_manga_series(chapters, id_to_name_dict):
         chapters: List of chapter dictionaries
 
     Returns:
-        dict: Dictionary with manga IDs as keys and lists of chapters as values
+        dict: Dictionary with manga names as keys and lists of chapters as values
     """
     manga_groups = {}
 
