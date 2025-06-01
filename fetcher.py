@@ -128,7 +128,6 @@ def display_grouped_manga(manga_groups):
             # Format the published date
             if published_at != 'Unknown':
                 try:
-                    from datetime import datetime
                     dt = datetime.fromisoformat(published_at.replace('Z', '+00:00'))
                     formatted_date = dt.strftime('%m/%d %H:%M')
                 except:
