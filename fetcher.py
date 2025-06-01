@@ -59,25 +59,6 @@ def get_latest_chapters(access_token, manga_id, days_back=30):
 
     return valid_chapters
 
-def display_chapters(chapters):
-    if not chapters:
-        print("No recent chapters found")
-        return
-
-    print("=" * 80)
-
-    for i, chapter in enumerate(chapters, 1):
-        attrs = chapter['attributes']
-        date = attrs['publishAt'][:10]
-        ch = attrs.get('chapter', 'N/A')
-        title = attrs.get('title') or "No Title"
-        url = attrs.get('externalUrl', 'No direct link')
-
-        print(f"{i}. Chapter {ch}: {title}")
-        print(f"   Date: {date}")
-        print(f"   Link: {url}")
-        print()
-
 def group_by_manga_series(chapters, id_to_name_dict):
     """
     Groups a list of chapter objects by manga series.
