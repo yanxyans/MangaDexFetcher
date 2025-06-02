@@ -23,9 +23,9 @@ def home():
     </head>
     <body>
         <h1>🔥 Manga Tracker</h1>
-        <button onclick="fetchManga()">Get Latest Manga Updates</button>
-        <pre id="result">Click button to get updates...</pre>
-
+        <button onclick="fetchManga()">Refresh Manga Updates</button>
+        <pre id="result">Loading...</pre>
+    
         <script>
             function fetchManga() {
                 document.getElementById('result').innerHTML = 'Loading...';
@@ -38,6 +38,9 @@ def home():
                         document.getElementById('result').innerHTML = 'Error: ' + error;
                     });
             }
+    
+            // Load manga data when page loads
+            window.addEventListener('load', fetchManga);
         </script>
     </body>
     </html>
