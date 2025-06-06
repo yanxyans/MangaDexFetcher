@@ -277,10 +277,13 @@ def home():
 @app.route('/api/manga')
 def get_manga():
     try:
+        import json
+        from datetime import datetime
+
         # Use your functions exactly as they are
         token = authenticate()
         if not token:
-            return Response('{"error": "Authentication failed"}', mimetype='application/json', status=500)
+            return Response(json.dumps({"error": "Authentication failed"}), mimetype='application/json', status=500)
 
         all_chapters = []
         for manga_id in MANGA_IDS:
@@ -311,7 +314,6 @@ def get_manga():
                 # Format the published date
                 if published_at != 'Unknown':
                     try:
-                        from datetime import datetime
                         dt = datetime.fromisoformat(published_at.replace('Z', '+00:00'))
                         formatted_date = dt.strftime('%m/%d %H:%M')
                     except:
@@ -329,12 +331,12 @@ def get_manga():
             json_data[manga_name] = processed_chapters
 
         return Response(
-            f'{json_data}'.replace("'", '"'),  # Quick JSON conversion
+            json.dumps(json_data, ensure_ascii=False, indent=2),
             mimetype='application/json'
         )
 
     except Exception as e:
-        return Response(f'{{"error": "{str(e)}"}}', mimetype='application/json', status=500)
+        return Response(json.dumps({"error": str(e)}), mimetype='application/json', status=500)
 
 
 if __name__ == '__main__':
