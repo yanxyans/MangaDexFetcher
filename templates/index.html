@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Manga Tracker</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>🔥 Manga Tracker</h1>
+        <div class="controls">
+            <button onclick="fetchManga()">🔄 Refresh Updates</button>
+        </div>
+        <div id="result" class="loading">Loading manga updates...</div>
+        <div id="lastUpdated" class="last-updated"></div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+    <script>
+        // Load manga data when page loads
+        window.addEventListener('load', fetchManga);
+    </script>
+</body>
+</html>

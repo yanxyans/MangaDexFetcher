@@ -1,0 +1,190 @@
+* { 
+    box-sizing: border-box; 
+}
+
+body { 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+    margin: 0; 
+    padding: 10px;
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    color: #fff;
+    line-height: 1.4;
+    font-size: 14px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 1.8em;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.controls {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+button {
+    padding: 8px 16px;
+    font-size: 14px;
+    cursor: pointer;
+    background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+    border: none;
+    border-radius: 20px;
+    color: white;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(255, 107, 107, 0.3);
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+.loading {
+    text-align: center;
+    font-size: 16px;
+    color: #ffd700;
+    margin: 20px 0;
+}
+
+.manga-container {
+    display: grid;
+    gap: 12px;
+}
+
+.manga-series {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 12px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+.manga-title {
+    font-size: 1.1em;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #ffd700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.chapter-count {
+    background: rgba(255, 215, 0, 0.2);
+    padding: 4px 12px;
+    border-radius: 15px;
+    font-size: 0.8em;
+    color: #ffd700;
+}
+
+.chapters-grid {
+    display: grid;
+    gap: 6px;
+    margin-top: 8px;
+}
+
+.chapter-item {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 6px;
+    padding: 8px;
+    display: grid;
+    grid-template-columns: auto 1fr auto auto;
+    gap: 10px;
+    align-items: center;
+    transition: all 0.3s ease;
+    border-left: 3px solid transparent;
+    font-size: 0.9em;
+}
+
+.chapter-item:hover {
+    background: rgba(0, 0, 0, 0.5);
+    border-left-color: #ff6b6b;
+    transform: translateX(3px);
+}
+
+.chapter-number {
+    font-weight: bold;
+    color: #4ecdc4;
+    min-width: 50px;
+    font-size: 0.95em;
+}
+
+.chapter-title {
+    color: #fff;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.chapter-date {
+    color: #bbb;
+    font-size: 0.8em;
+    min-width: 70px;
+}
+
+.chapter-link {
+    color: #ff6b6b;
+    text-decoration: none;
+    padding: 4px 8px;
+    border: 1px solid #ff6b6b;
+    border-radius: 12px;
+    font-size: 0.8em;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.chapter-link:hover {
+    background: #ff6b6b;
+    color: white;
+    transform: scale(1.05);
+}
+
+.error {
+    background: rgba(255, 0, 0, 0.2);
+    border: 1px solid #ff4757;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    color: #ff4757;
+    margin: 20px 0;
+}
+
+.last-updated {
+    text-align: center;
+    color: #bbb;
+    margin-top: 10px;
+    font-size: 0.8em;
+}
+
+@media (max-width: 768px) {
+    .chapter-item {
+        grid-template-columns: 1fr;
+        gap: 8px;
+        text-align: left;
+    }
+    
+    .chapter-link {
+        justify-self: start;
+    }
+    
+    body { 
+        padding: 10px; 
+    }
+    
+    h1 { 
+        font-size: 2em; 
+    }
+}
