@@ -61,7 +61,7 @@ function displayMangaData(mangaData) {
                 <div class="chapter-item">
                     <div class="chapter-number">Ch. ${chapterNum}</div>
                     <div class="chapter-title" title="${title}">${title}</div>
-                    <div class="chapter-date">${date}</div>
+                    <div class="chapter-date ${chapter.is_latest ? 'latest-chapter' : ''}">${date}</div>
                     ${url ? `<a href="${url}" class="chapter-link" target="_blank" rel="noopener">Read</a>` : '<span class="chapter-link" style="opacity:0.5;">No Link</span>'}
                 </div>
             `;

@@ -188,3 +188,7 @@ button:active {
         font-size: 2em; 
     }
 }
+
+.latest-chapter {
+    color: red;
+}

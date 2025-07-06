@@ -1,7 +1,7 @@
 from flask import Flask, Response, render_template
 import os
 import json
-from datetime import datetime
+from datetime import datetime, timezone
 
 # Import your existing functions
 from fetcher import authenticate, get_latest_chapters, group_by_manga_series
@@ -33,6 +33,8 @@ def get_manga():
         # Convert to JSON format for better frontend handling
         json_data = {}
 
+        max_dt = datetime.min.replace(tzinfo=timezone.utc)
+
         for manga_name, chapters in grouped.items():
             # Sort chapters by chapter number (highest to lowest)
             sorted_chapters = sorted(
@@ -50,10 +52,12 @@ def get_manga():
                 chapter_url = attrs.get('externalUrl', '')
 
                 # Format the published date
+                dt = None
                 if published_at != 'Unknown':
                     try:
                         dt = datetime.fromisoformat(published_at.replace('Z', '+00:00'))
                         formatted_date = dt.strftime('%m/%d %H:%M')
+                        max_dt = max(max_dt, dt)
                     except:
                         formatted_date = published_at[:10]  # Just date part
                 else:
@@ -63,10 +67,16 @@ def get_manga():
                     'chapter': chapter_num,
                     'title': title,
                     'formatted_date': formatted_date,
-                    'url': chapter_url
+                    'url': chapter_url,
+                    'dt': dt
                 })
 
             json_data[manga_name] = processed_chapters
+
+        for manga_name, chapters in json_data.items():
+            for ch in chapters:
+                dt = ch.pop('dt', None)
+                ch['is_latest'] = dt == max_dt
 
         return Response(
             json.dumps(json_data, ensure_ascii=False, indent=2),
