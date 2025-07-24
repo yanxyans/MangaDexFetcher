@@ -73,10 +73,13 @@ def get_manga():
 
             json_data[manga_name] = processed_chapters
 
+        from datetime import timedelta
+        cutoff_date = max_dt - timedelta(days=5) if max_dt else None
+        
         for manga_name, chapters in json_data.items():
             for ch in chapters:
                 dt = ch.pop('dt', None)
-                ch['is_latest'] = dt == max_dt
+                ch['is_latest'] = dt is not None and cutoff_date is not None and dt >= cutoff_date
 
         return Response(
             json.dumps(json_data, ensure_ascii=False, indent=2),
